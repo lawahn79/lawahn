@@ -1,10 +1,28 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization to prevent crash if API key is missing
+let aiInstance: GoogleGenAI | null = null;
+
+const getAIInstance = () => {
+  if (!aiInstance) {
+    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.warn("GEMINI_API_KEY is missing. AI features will not work.");
+      return null;
+    }
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
 
 export const getLegalAssistantResponse = async (userMessage: string) => {
   try {
+    const ai = getAIInstance();
+    if (!ai) {
+      return "현재 AI 상담 서비스를 이용할 수 없습니다. (API 키 설정 필요)";
+    }
+
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: userMessage,

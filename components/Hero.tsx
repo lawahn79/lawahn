@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
     }
   };
 
-  const LAWYER_PHOTO_URL = "https://postfiles.pstatic.net/MjAyNTEyMjZfMjIy/MDAxNzY2NzE3MzQ1OTEw.JUbFIRE3bg0mZv0hv-dQoqCgBLMEusggyxP3ln-DNCsg.yqrEw9VZWmDMcBPnJYkF61of2ws677bpyGAg7qvnkBMg.PNG/lawyer_ahn.png?type=w966";
+  const LAWYER_PHOTO_URL = "https://raw.githubusercontent.com/lawahn79/lawahn/main/lawyer_ahn.png";
 
   return (
     <section className="relative min-h-[90vh] lg:h-screen flex items-center overflow-hidden bg-[#0a0f1d]">
@@ -75,10 +75,13 @@ const Hero: React.FC = () => {
             <img 
               src={LAWYER_PHOTO_URL} 
               alt="안재현 대표변호사" 
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover object-center scale-110 translate-y-4"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = LAWYER_PHOTO_URL;
+                if (target.src !== LAWYER_PHOTO_URL) {
+                  target.src = LAWYER_PHOTO_URL;
+                }
               }}
             />
 

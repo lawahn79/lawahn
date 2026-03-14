@@ -5,7 +5,7 @@ const ExpertSection: React.FC = () => {
   const expert = {
     name: "안재현",
     role: "대표변호사",
-    image: "https://postfiles.pstatic.net/MjAyNTEyMjZfMjIy/MDAxNzY2NzE3MzQ1OTEw.JUbFIRE3bg0mZv0hv-dQoqCgBLMEusggyxP3ln-DNCsg.yqrEw9VZWmDMcBPnJYkF61of2ws677bpyGAg7qvnkBMg.PNG/lawyer_ahn.png?type=w966", 
+    image: "https://raw.githubusercontent.com/lawahn79/lawahn/main/lawyer_ahn.png", 
     specialties: [
       "대한변호사협회 등록 형사전문", 
       "대한변호사협회 등록 이혼전문"

@@ -2,7 +2,7 @@
 import React from 'react';
 
 const AboutSection: React.FC = () => {
-  const LAWYER_PHOTO_URL = "https://postfiles.pstatic.net/MjAyNTEyMjZfMjIy/MDAxNzY2NzE3MzQ1OTEw.JUbFIRE3bg0mZv0hv-dQoqCgBLMEusggyxP3ln-DNCsg.yqrEw9VZWmDMcBPnJYkF61of2ws677bpyGAg7qvnkBMg.PNG/lawyer_ahn.png?type=w966";
+  const LAWYER_PHOTO_URL = "https://raw.githubusercontent.com/lawahn79/lawahn/main/lawyer_ahn.png";
 
   return (
     <section className="py-32 bg-white overflow-hidden scroll-mt-24" id="사무소소개">
@@ -22,7 +22,7 @@ const AboutSection: React.FC = () => {
                 className="w-full h-full object-cover object-center relative z-10 transition-transform duration-1000 group-hover:scale-105"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = LAWYER_PHOTO_URL;
+                  target.src = "https://picsum.photos/seed/lawyer/800/1000";
                 }}
               />
               

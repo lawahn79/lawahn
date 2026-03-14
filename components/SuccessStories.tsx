@@ -126,7 +126,7 @@ const SuccessStories: React.FC = () => {
                       onClick={() => setShowImageModal(true)}
                       className="w-full h-32 bg-slate-100 rounded-2xl overflow-hidden relative group"
                     >
-                      <img src={selectedCase.image} alt="판결문 미리보기" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" />
+                      <img src={selectedCase.image} alt="판결문 미리보기" referrerPolicy="no-referrer" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" />
                       <div className="absolute inset-0 flex items-center justify-center font-bold text-slate-700">판결문 크게 보기</div>
                     </button>
                   </div>
@@ -157,7 +157,7 @@ const SuccessStories: React.FC = () => {
         {showImageModal && selectedCase?.image && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setShowImageModal(false)}>
             <div className="max-w-4xl w-full max-h-[90vh] relative" onClick={e => e.stopPropagation()}>
-               <img src={selectedCase.image} alt="판결문 원본" className="w-full h-full object-contain shadow-2xl rounded-lg" />
+               <img src={selectedCase.image} alt="판결문 원본" referrerPolicy="no-referrer" className="w-full h-full object-contain shadow-2xl rounded-lg" />
                <button 
                   onClick={() => setShowImageModal(false)}
                   className="absolute -top-12 right-0 text-white flex items-center gap-2 font-bold"

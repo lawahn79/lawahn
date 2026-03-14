@@ -2,7 +2,7 @@
 import React from 'react';
 
 const AboutSection: React.FC = () => {
-  const LAWYER_PHOTO_URL = "https://raw.githubusercontent.com/lawahn79/lawahn/main/lawyer_ahn.png";
+  const LAWYER_PHOTO_URL = "https://raw.githubusercontent.com/lawahn79/lawahn/45c096dca647440cd80da7ce8f7d0320a4beae73/lawyer_ahn.png";
 
   return (
     <section className="py-32 bg-white overflow-hidden scroll-mt-24" id="사무소소개">

@@ -117,19 +117,25 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-10 font-medium">
-          {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={'href' in item ? item.href : `/#${item.id}`}
-              onClick={(e) => handleMenuClick(e, item)}
-              className={`text-sm font-bold transition-all hover:text-amber-500 ${
-                isScrolled ? 'text-slate-800' : 'text-white drop-shadow-sm'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+  {menuItems.map((item) => (
+    <a
+      key={item.label}
+      href={item.href ? item.href : `/#${item.id}`}
+      onClick={(e) => {
+        if (item.href) {
+          return;
+        }
+
+        handleMenuClick(e, item.id as string);
+      }}
+      className={`text-sm font-bold transition-all hover:text-amber-500 ${
+        isScrolled ? 'text-slate-800' : 'text-white drop-shadow-sm'
+      }`}
+    >
+      {item.label}
+    </a>
+  ))}
+</div>
 
         <div className="flex items-center gap-4">
           <button

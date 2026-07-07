@@ -61,6 +61,9 @@ const App: React.FC = () => {
       });
     }
   };
+
+  const path = window.location.pathname;
+  
   if (path === '/haja-lawsuit') {
   return (
     <div className="min-h-screen selection:bg-amber-100 selection:text-amber-900 scroll-smooth text-slate-900 overflow-x-hidden">

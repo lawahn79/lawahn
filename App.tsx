@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import KakaoTalkFAB from './components/KakaoTalkFAB';
 import ConsultationPopup from './components/ConsultationPopup';
 import AdminDashboard from './components/AdminDashboard';
+import HajaLandingPage from './components/HajaLandingPage';
 
 const App: React.FC = () => {
   const [showPopup, setShowPopup] = useState(true);

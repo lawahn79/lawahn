@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 type CaseResult = {
   id: string;
-  title: string;
-  result: string;
-  summary: string;
+  title?: string;
+  result?: string;
+  summary?: string;
   category: string;
   image: string;
   thumb?: string;
@@ -41,7 +41,7 @@ const CaseResultMarquee: React.FC = () => {
   const marqueeItems = [...visibleItems, ...visibleItems, ...visibleItems];
 
   return (
-    <section className="bg-slate-950 pt-8 pb-9 overflow-hidden border-y border-amber-500/20">
+    <section className="bg-slate-950 pt-8 pb-10 overflow-hidden border-y border-amber-500/20">
       <style>
         {`
           @keyframes case-result-marquee {
@@ -66,7 +66,7 @@ const CaseResultMarquee: React.FC = () => {
 
           @media (max-width: 768px) {
             .case-result-marquee-track {
-              animation-duration: 38s;
+              animation-duration: 36s;
             }
           }
         `}
@@ -95,37 +95,19 @@ const CaseResultMarquee: React.FC = () => {
             <a
               key={`${item.id}-${index}`}
               href="#성공사례"
-              className="group w-[205px] md:w-[235px] shrink-0 overflow-hidden rounded-[1.5rem] bg-white shadow-xl ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="group relative w-[220px] md:w-[270px] shrink-0 overflow-hidden rounded-[1.6rem] bg-white shadow-xl ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
-              <div className="relative h-[270px] md:h-[310px] bg-slate-100 overflow-hidden">
+              <div className="relative h-[315px] md:h-[385px] bg-slate-100 overflow-hidden">
                 <img
                   src={item.image}
-                  alt={`${item.title} ${item.result}`}
+                  alt={item.title ? `${item.title} ${item.result ?? ''}` : '수행사건 결과'}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
                   loading="lazy"
                 />
 
-                <div className="absolute left-3 top-3 rounded-full bg-slate-950/90 px-3 py-1 text-[10px] font-black text-amber-400 backdrop-blur">
+                <div className="absolute left-3 top-3 rounded-full bg-slate-950/90 px-3 py-1 text-[10px] md:text-[11px] font-black text-amber-400 backdrop-blur">
                   {item.category}
                 </div>
-              </div>
-
-              <div className="bg-white px-4 py-4">
-                <p className="text-[10px] font-black tracking-[0.18em] text-amber-600 uppercase">
-                  Case Result
-                </p>
-
-                <h4 className="mt-1 text-base md:text-lg font-black leading-snug text-slate-950 truncate">
-                  {item.result}
-                </h4>
-
-                <p className="mt-1 text-sm font-bold text-slate-500 truncate">
-                  {item.title}
-                </p>
-
-                <p className="mt-2 text-sm font-black text-slate-800 truncate">
-                  {item.summary}
-                </p>
               </div>
             </a>
           ))}

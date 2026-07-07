@@ -13,6 +13,7 @@ import KakaoTalkFAB from './components/KakaoTalkFAB';
 import ConsultationPopup from './components/ConsultationPopup';
 import AdminDashboard from './components/AdminDashboard';
 import HajaLandingPage from './components/HajaLandingPage';
+import CertificateMarquee from './components/CertificateMarquee';
 
 const App: React.FC = () => {
   const [showPopup, setShowPopup] = useState(true);

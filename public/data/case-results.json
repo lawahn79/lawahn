@@ -1,0 +1,112 @@
+[
+  {
+    "id": "case-01",
+    "title": "미성년자약취미수",
+    "result": "벌금형으로 종결",
+    "summary": "벌금 200만 원 선고",
+    "category": "형사",
+    "image": "/images/case-results/case-01-minor-abduction-attempt-fine.webp",
+    "thumb": "/images/case-results/thumbs/case-01-minor-abduction-attempt-fine-thumb.webp",
+    "visible": true,
+    "order": 1
+  },
+  {
+    "id": "case-02",
+    "title": "택배기사 폭행사건",
+    "result": "공소기각 확보",
+    "summary": "처벌 없이 종결",
+    "category": "형사",
+    "image": "/images/case-results/case-02-delivery-driver-assault-dismissal.webp",
+    "thumb": "/images/case-results/thumbs/case-02-delivery-driver-assault-dismissal-thumb.webp",
+    "visible": true,
+    "order": 2
+  },
+  {
+    "id": "case-03",
+    "title": "경찰관 폭행 사건",
+    "result": "일부 공소 기각",
+    "summary": "징역 1년 집행유예 2년",
+    "category": "형사",
+    "image": "/images/case-results/case-03-police-assault-probation.webp",
+    "thumb": "/images/case-results/thumbs/case-03-police-assault-probation-thumb.webp",
+    "visible": true,
+    "order": 3
+  },
+  {
+    "id": "case-04",
+    "title": "강간미수 사건",
+    "result": "강간미수 무죄",
+    "summary": "강제추행만 유죄, 집행유예 선고",
+    "category": "성범죄",
+    "image": "/images/case-results/case-04-sexual-assault-attempt-acquittal.webp",
+    "thumb": "/images/case-results/thumbs/case-04-sexual-assault-attempt-acquittal-thumb.webp",
+    "visible": true,
+    "order": 4
+  },
+  {
+    "id": "case-05",
+    "title": "자전거 사고 구상금",
+    "result": "원고 일부 승소",
+    "summary": "과실비율 50% 인정",
+    "category": "민사",
+    "image": "/images/case-results/case-05-bicycle-accident-partial-win.webp",
+    "thumb": "/images/case-results/thumbs/case-05-bicycle-accident-partial-win-thumb.webp",
+    "visible": true,
+    "order": 5
+  },
+  {
+    "id": "case-06",
+    "title": "유족 손해배상",
+    "result": "원고 승소",
+    "summary": "배우자 5,000만 원, 자녀 각 3,500만 원 지급",
+    "category": "민사",
+    "image": "/images/case-results/case-06-family-damages-win.webp",
+    "thumb": "/images/case-results/thumbs/case-06-family-damages-win-thumb.webp",
+    "visible": true,
+    "order": 6
+  },
+  {
+    "id": "case-07",
+    "title": "음주운전 재범",
+    "result": "집행유예 선고 방어",
+    "summary": "징역 1년 집행유예 2년",
+    "category": "형사",
+    "image": "/images/case-results/case-07-dui-repeat-probation.webp",
+    "thumb": "/images/case-results/thumbs/case-07-dui-repeat-probation-thumb.webp",
+    "visible": true,
+    "order": 7
+  },
+  {
+    "id": "case-08",
+    "title": "손해배상 항소심",
+    "result": "원고 승소",
+    "summary": "제1심 판결 유지",
+    "category": "민사",
+    "image": "/images/case-results/case-08-appeal-damages-win.webp",
+    "thumb": "/images/case-results/thumbs/case-08-appeal-damages-win-thumb.webp",
+    "visible": true,
+    "order": 8
+  },
+  {
+    "id": "case-09",
+    "title": "임대차보증금 반환",
+    "result": "보증금 반환 성공",
+    "summary": "260,562,980원 지급",
+    "category": "부동산",
+    "image": "/images/case-results/case-09-lease-deposit-return-win.webp",
+    "thumb": "/images/case-results/thumbs/case-09-lease-deposit-return-win-thumb.webp",
+    "visible": true,
+    "order": 9
+  },
+  {
+    "id": "case-10",
+    "title": "윗집 누수 손해배상",
+    "result": "원고 일부 승소",
+    "summary": "14,088,899원 배상",
+    "category": "부동산",
+    "image": "/images/case-results/case-10-water-leak-damages-win.webp",
+    "thumb": "/images/case-results/thumbs/case-10-water-leak-damages-win-thumb.webp",
+    "visible": true,
+    "order": 10
+  }
+]

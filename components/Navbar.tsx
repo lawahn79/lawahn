@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
     { label: '사무소소개', id: '사무소소개' },
     { label: '업무분야', id: '업무분야' },
     { label: '성공사례', id: '성공사례' },
-    { label: '하자소송', href: '/haja-lawsuit' },
+    { label: '아파트하자소송', href: '/haja-lawsuit' },
     { label: '변호사소개', id: '변호사소개' },
     { label: '오시는길', id: '오시는길' },
   ];

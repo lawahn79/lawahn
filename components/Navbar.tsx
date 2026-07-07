@@ -88,13 +88,13 @@ const Navbar: React.FC = () => {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center gap-3">
         <div
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-2 cursor-pointer shrink-0"
           onClick={handleLogoClick}
         >
           <div
-            className={`text-2xl font-black tracking-tighter flex items-baseline transition-colors ${
+            className={`text-xl md:text-2xl font-black tracking-tighter flex items-baseline transition-colors ${
               isScrolled ? 'text-blue-900' : 'text-white'
             }`}
           >
@@ -116,35 +116,42 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
+        {/* PC Menu */}
         <div className="hidden lg:flex items-center gap-10 font-medium">
-  {menuItems.map((item) => (
-    <a
-      key={item.label}
-      href={item.href ? item.href : `/#${item.id}`}
-      onClick={(e) => {
-        if (item.href) {
-          return;
-        }
+          {menuItems.map((item) => (
+            <a
+              key={item.label}
+              href={'href' in item ? item.href : `/#${item.id}`}
+              onClick={(e) => handleMenuClick(e, item)}
+              className={`text-sm font-bold transition-all hover:text-amber-500 ${
+                isScrolled ? 'text-slate-800' : 'text-white drop-shadow-sm'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
 
-        handleMenuClick(e, item.id as string);
-      }}
-      className={`text-sm font-bold transition-all hover:text-amber-500 ${
-        isScrolled ? 'text-slate-800' : 'text-white drop-shadow-sm'
-      }`}
-    >
-      {item.label}
-    </a>
-  ))}
-</div>
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          {/* Mobile Haja Button */}
+          <a
+            href="/haja-lawsuit"
+            className={`lg:hidden inline-flex items-center justify-center rounded-full px-4 py-3 text-xs font-black shadow-lg transition-all ${
+              isScrolled
+                ? 'bg-amber-600 text-white'
+                : 'bg-white/10 text-white border border-white/20 backdrop-blur-md'
+            }`}
+          >
+            하자소송
+          </a>
 
-        <div className="flex items-center gap-4">
           <button
             onClick={handleConsultationClick}
             className={`${
               isScrolled ? 'bg-blue-900' : 'bg-amber-600'
-            } text-white text-xs font-bold px-6 py-3 rounded-full shadow-lg hover:opacity-90 transition-all`}
+            } text-white text-xs font-bold px-4 md:px-6 py-3 rounded-full shadow-lg hover:opacity-90 transition-all`}
           >
-            상담신청하기
+            상담신청
           </button>
         </div>
       </div>

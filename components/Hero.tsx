@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
     "https://raw.githubusercontent.com/lawahn79/lawahn/45c096dca647440cd80da7ce8f7d0320a4beae73/lawyer_ahn.png";
 
   return (
-    <section className="relative min-h-[600px] lg:min-h-[560px] xl:min-h-[600px] flex items-start overflow-hidden bg-[#0a0f1d]">
+    <section className="relative overflow-hidden bg-[#0a0f1d] pt-20 lg:pt-20 pb-8 lg:pb-10">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1d] via-[#0a0f1d]/80 to-transparent z-10"></div>
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
         ></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-20 flex flex-col lg:flex-row items-center justify-between w-full pt-24 pb-8 lg:pt-24 lg:pb-10">
+      <div className="container mx-auto px-6 relative z-20 flex flex-col lg:flex-row items-center justify-between w-full">
         {/* Text Area */}
         <div className="lg:w-[55%] mb-8 lg:mb-0 text-center lg:text-left animate-in fade-in slide-in-from-left-10 duration-1000">
           <div className="inline-flex items-center gap-3 px-5 py-2 bg-amber-600/10 border border-amber-600/30 rounded-full mb-5">

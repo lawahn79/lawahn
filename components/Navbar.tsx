@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Hero: React.FC = () => {
-  const scrollToForm = () => {
-    const element = document.getElementById('consultation-form');
+type MenuItem =
+  | { label: string; id: string; href?: never }
+  | { label: string; href: string; id?: never };
+
+const Navbar: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
 
     if (element) {
       const offset = 80;
@@ -13,123 +31,178 @@ const Hero: React.FC = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
 
-  const LAWYER_PHOTO_URL =
-    "https://raw.githubusercontent.com/lawahn79/lawahn/45c096dca647440cd80da7ce8f7d0320a4beae73/lawyer_ahn.png";
+  const handleConsultationClick = () => {
+    setIsMobileMenuOpen(false);
+
+    if (window.location.pathname !== '/') {
+      window.location.href = '/#consultation-form';
+      return;
+    }
+
+    scrollToSection('consultation-form');
+  };
+
+  const handleMenuClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: MenuItem
+  ) => {
+    setIsMobileMenuOpen(false);
+
+    if ('href' in item) {
+      return;
+    }
+
+    e.preventDefault();
+
+    if (window.location.pathname !== '/') {
+      window.location.href = `/#${item.id}`;
+      return;
+    }
+
+    scrollToSection(item.id);
+  };
+
+  const handleLogoClick = () => {
+    setIsMobileMenuOpen(false);
+
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const menuItems: MenuItem[] = [
+    { label: '사무소소개', id: '사무소소개' },
+    { label: '업무분야', id: '업무분야' },
+    { label: '성공사례', id: '성공사례' },
+    { label: '아파트하자소송', href: '/haja-lawsuit' },
+    { label: '변호사소개', id: '변호사소개' },
+    { label: '오시는길', id: '오시는길' },
+  ];
+
+  const navActive = isScrolled || isMobileMenuOpen;
 
   return (
-    <section className="relative min-h-[600px] lg:min-h-[560px] xl:min-h-[600px] flex items-start overflow-hidden bg-[#0a0f1d]">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1d] via-[#0a0f1d]/80 to-transparent z-10"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#1e293b]/10 -skew-x-12 translate-x-1/3"></div>
-
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        navActive
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center gap-3">
+        {/* Logo */}
         <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        ></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-20 flex flex-col lg:flex-row items-center justify-between w-full pt-24 pb-8 lg:pt-24 lg:pb-10">
-        {/* Text Area */}
-        <div className="lg:w-[55%] mb-8 lg:mb-0 text-center lg:text-left animate-in fade-in slide-in-from-left-10 duration-1000">
-          <div className="inline-flex items-center gap-3 px-5 py-2 bg-amber-600/10 border border-amber-600/30 rounded-full mb-5">
-            <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
-
-            <span className="text-amber-500 text-xs font-black uppercase tracking-[0.2em]">
-              Certified Specialist Law Office
-            </span>
+          className="flex items-center gap-2 cursor-pointer shrink-0"
+          onClick={handleLogoClick}
+        >
+          <div
+            className={`text-xl md:text-2xl font-black tracking-tighter flex items-baseline transition-colors ${
+              navActive ? 'text-blue-900' : 'text-white'
+            }`}
+          >
+            LAW OFFICE <span className="text-amber-500 font-serif ml-2">安</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-[4.35rem] xl:text-[4.8rem] font-black text-white leading-[1.05] mb-6 tracking-tighter">
-            결과가 말해주는<br />
-            실력의 차이,<br />
-            <span className="text-amber-500">안재현 변호사</span>
-          </h1>
+          <div
+            className={`h-6 w-px mx-2 hidden md:block transition-colors ${
+              navActive ? 'bg-slate-300' : 'bg-white/30'
+            }`}
+          ></div>
 
-          <div className="max-w-xl mx-auto lg:mx-0">
-            <p className="text-slate-300 text-base md:text-xl lg:text-[1.35rem] mb-7 font-medium leading-relaxed border-l-4 border-amber-600 pl-6 text-left">
-              대한변협 등록 형사·이혼 전문 변호사가<br />
-              의뢰인의 입장에서 가장 명쾌한 해답을 제시합니다.
-            </p>
-
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-              <button
-                onClick={scrollToForm}
-                className="group relative px-7 md:px-9 py-4 md:py-5 bg-amber-600 text-white text-base md:text-lg font-black rounded-2xl shadow-[0_20px_40px_-10px_rgba(217,119,6,0.4)] hover:bg-amber-500 transition-all duration-300 overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  24시 실시간 상담 예약
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-              </button>
-
-              <button
-                onClick={() => window.location.href = 'tel:1688-5644'}
-                className="px-7 md:px-9 py-4 md:py-5 bg-white/5 backdrop-blur-md text-white text-base md:text-lg font-black border border-white/20 rounded-2xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
-              >
-                <svg
-                  className="w-6 h-6 text-amber-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.47 5.47l.772-1.547a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                1688-5644
-              </button>
-            </div>
+          <div
+            className={`text-xs font-bold hidden md:block leading-none transition-colors ${
+              navActive ? 'text-slate-500' : 'text-white/80'
+            }`}
+          >
+            법률사무소 安
           </div>
         </div>
 
-        {/* Lawyer Photo Area */}
-        <div className="lg:w-[38%] relative flex items-center justify-center animate-in fade-in slide-in-from-right-10 duration-1000 delay-200">
-          <div className="relative w-full max-w-[300px] md:max-w-[340px] lg:max-w-[360px] xl:max-w-[380px] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-[10px] border-white/5 shadow-2xl bg-slate-800">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d] via-transparent to-transparent z-10 opacity-40"></div>
+        {/* PC Menu */}
+        <div className="hidden lg:flex items-center gap-10 font-medium">
+          {menuItems.map((item) => (
+            <a
+              key={item.label}
+              href={'href' in item ? item.href : `/#${item.id}`}
+              onClick={(e) => handleMenuClick(e, item)}
+              className={`text-sm font-bold transition-all hover:text-amber-500 ${
+                navActive ? 'text-slate-800' : 'text-white drop-shadow-sm'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
 
-            <img
-              src={LAWYER_PHOTO_URL}
-              alt="안재현 대표변호사"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center scale-110 translate-y-4"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
+        {/* Right Buttons */}
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <button
+            onClick={handleConsultationClick}
+            className={`hidden sm:inline-flex ${
+              navActive ? 'bg-blue-900' : 'bg-amber-600'
+            } text-white text-xs font-bold px-4 md:px-6 py-3 rounded-full shadow-lg hover:opacity-90 transition-all`}
+          >
+            상담신청
+          </button>
 
-                if (target.src !== LAWYER_PHOTO_URL) {
-                  target.src = LAWYER_PHOTO_URL;
-                }
-              }}
-            />
-
-            <div className="absolute bottom-7 left-7 z-20">
-              <div className="text-amber-500 font-serif text-[3rem] lg:text-[3.5rem] leading-none mb-1 opacity-80">
-                安
-              </div>
-
-              <div className="text-white text-2xl lg:text-3xl font-black tracking-tighter">
-                안재현 대표변호사
-              </div>
-
-              <div className="text-amber-400/60 text-xs font-bold uppercase tracking-widest">
-                Representative Attorney
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-500/20 rounded-full blur-[80px] -z-10"></div>
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-[80px] -z-10"></div>
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className={`lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border text-xl font-black transition-all ${
+              navActive
+                ? 'border-slate-200 bg-white text-slate-900 shadow-md'
+                : 'border-white/20 bg-white/10 text-white backdrop-blur-md'
+            }`}
+            aria-label="모바일 메뉴 열기"
+          >
+            {isMobileMenuOpen ? '×' : '☰'}
+          </button>
         </div>
       </div>
-    </section>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t border-slate-100 shadow-xl">
+          <div className="px-4 pt-4 pb-5 grid gap-2">
+            {menuItems.map((item) => (
+              <a
+                key={item.label}
+                href={'href' in item ? item.href : `/#${item.id}`}
+                onClick={(e) => handleMenuClick(e, item)}
+                className="flex items-center justify-between rounded-2xl bg-slate-50 px-5 py-4 text-base font-black text-slate-900 hover:bg-amber-50 hover:text-amber-600 transition-all"
+              >
+                {item.label}
+                <span className="text-amber-500">→</span>
+              </a>
+            ))}
+
+            <button
+              onClick={handleConsultationClick}
+              className="mt-2 rounded-2xl bg-amber-600 px-5 py-4 text-base font-black text-white shadow-lg"
+            >
+              상담신청하기
+            </button>
+
+            <a
+              href="tel:1688-5644"
+              className="rounded-2xl bg-blue-900 px-5 py-4 text-center text-base font-black text-white shadow-lg"
+            >
+              전화상담 1688-5644
+            </a>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 
-export default Hero;
+export default Navbar;

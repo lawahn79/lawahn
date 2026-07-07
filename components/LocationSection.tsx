@@ -54,19 +54,22 @@ const LocationSection: React.FC = () => {
             </div>
 
             <div className="mt-12">
-              <a 
-                href="https://maps.app.goo.gl/uXj9X6eKzD6R8e7B9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-slate-800 hover:shadow-xl transition-all hover:scale-[1.02] active:scale-95 text-base shadow-lg"
-              >
-                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-amber-500" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                구글 지도로 크게보기
-              </a>
-            </div>
-          </div>
+  <a
+    href={googleMapUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-slate-800 hover:shadow-xl transition-all hover:scale-[1.02] active:scale-95 text-base shadow-lg"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      className="w-6 h-6 fill-amber-500"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+    </svg>
+    구글 지도로 크게보기
+  </a>
+</div>
           
           {/* 지도 영역 */}
           <div className="lg:w-2/3 w-full">

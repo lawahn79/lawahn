@@ -18,8 +18,7 @@ const Hero: React.FC = () => {
     }
   };
 
-  const LAWYER_PHOTO_URL =
-    "https://raw.githubusercontent.com/lawahn79/lawahn/45c096dca647440cd80da7ce8f7d0320a4beae73/lawyer_ahn.png";
+  const LAWYER_PHOTO_URL = "/images/lawyer-photo.webp";
 
   return (
     <section className="relative overflow-hidden bg-[#0a0f1d] pt-16 pb-8 lg:pt-16 lg:pb-8">

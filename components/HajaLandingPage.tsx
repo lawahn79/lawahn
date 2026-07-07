@@ -151,7 +151,7 @@ const HajaLandingPage: React.FC = () => {
               입주민의 초기비용 부담은 줄이고<br className="hidden md:block" /> 단지의 자산가치 회복을 위한 하자소송 검토 제안
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <CTAButton href="/#consultation-form" variant="gold">하자소송 검토 문의</CTAButton>
+              <CTAButton href="tel:1688-5644" variant="gold">하자소송 검토 문의</CTAButton>
               <CTAButton href="/" variant="light">법률사무소 메인으로</CTAButton>
             </div>
           </div>

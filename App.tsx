@@ -12,6 +12,7 @@ import KakaoTalkFAB from './components/KakaoTalkFAB';
 import ConsultationPopup from './components/ConsultationPopup';
 import AdminDashboard from './components/AdminDashboard';
 import HajaLandingPage from './components/HajaLandingPage';
+import CaseResultMarquee from './components/CaseResultMarquee';
 import CertificateMarquee from './components/CertificateMarquee';
 
 const App: React.FC = () => {
@@ -133,6 +134,9 @@ const App: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* Case Result Marquee Section */}
+        <CaseResultMarquee />
 
         {/* Certificate Marquee Section */}
         <CertificateMarquee />

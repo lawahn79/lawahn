@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   const LAWYER_PHOTO_URL = "/images/lawyer-photo.webp";
 
   return (
-    <section className="relative overflow-hidden bg-[#0a0f1d] pt-16 pb-8 lg:pt-16 lg:pb-8">
+    <section className="relative overflow-hidden bg-[#0a0f1d] pt-24 pb-8 lg:pt-24 lg:pb-8">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1d] via-[#0a0f1d]/80 to-transparent z-10"></div>

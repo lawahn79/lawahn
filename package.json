@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "generate:seo": "node scripts/generate-case-seo.mjs",
+    "predev": "npm run generate:seo",
     "dev": "vite",
+    "prebuild": "npm run generate:seo",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.3",
     "@google/genai": "^1.34.0",
+    "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
   "devDependencies": {

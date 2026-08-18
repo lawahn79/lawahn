@@ -354,6 +354,15 @@ const buildCasePageHtml = (item) => {
   return `<!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RB2T0ZT3H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RB2T0ZT3H1');
+  </script>
+
   <meta charset="UTF-8" />
   <meta
     name="viewport"

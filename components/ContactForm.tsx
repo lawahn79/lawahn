@@ -1,9 +1,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 const ContactForm: React.FC = () => {
   const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const hasStartedRef = useRef(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -68,6 +70,12 @@ const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    trackFunnelEvent('consultation_submit_attempt', {
+      cta_location: 'bottom_form_submit',
+      form_type: 'bottom_main',
+      consultation_category: formData.category
+    });
+
     if (!formData.name.trim()) {
       alert('성함을 입력해 주세요.');
       nameRef.current?.focus();
@@ -112,8 +120,18 @@ const ContactForm: React.FC = () => {
         })
       });
 
+      trackFunnelEvent('generate_lead', {
+        cta_location: 'bottom_form_submit',
+        form_type: 'bottom_main',
+        consultation_category: formData.category
+      });
       setSubmitted(true);
     } catch (error) {
+      trackFunnelEvent('consultation_submit_error', {
+        cta_location: 'bottom_form_submit',
+        form_type: 'bottom_main',
+        consultation_category: formData.category
+      });
       console.error('Submit Error:', error);
       alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도하시거나 1688-5644로 전화 부탁드립니다.');
     } finally {
@@ -173,7 +191,18 @@ const ContactForm: React.FC = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={handleSubmit}
+              onFocusCapture={() => {
+                if (hasStartedRef.current) return;
+                hasStartedRef.current = true;
+                trackFunnelEvent('consultation_form_start', {
+                  cta_location: 'bottom_form',
+                  form_type: 'bottom_main',
+                  consultation_category: formData.category
+                });
+              }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 mb-10">
                 <div className="space-y-2">
                   <label className="text-sm font-black text-slate-800 ml-1">의뢰인 성함</label>

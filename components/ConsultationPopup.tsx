@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 interface ConsultationPopupProps {
   onClose: () => void;
@@ -9,6 +10,7 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const hasStartedRef = useRef(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -23,7 +25,14 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
   const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpAeaJLVzSkzrAaHoJYQyXMd0PCKtw_oHvo-2YAhSxEvHqenTR90rwz6R6egp4pawS4Q/exec";
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 800);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+      trackFunnelEvent('inquiry_open', {
+        cta_location: 'timed_popup',
+        form_type: 'popup',
+        consultation_category: 'popup_urgent'
+      });
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -43,6 +52,12 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    trackFunnelEvent('consultation_submit_attempt', {
+      cta_location: 'popup_submit',
+      form_type: 'popup',
+      consultation_category: 'popup_urgent'
+    });
 
     if (!formData.name.trim()) {
       alert('성함을 입력해 주세요.');
@@ -75,9 +90,19 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
           message: formData.content
         })
       });
-      
+
+      trackFunnelEvent('generate_lead', {
+        cta_location: 'popup_submit',
+        form_type: 'popup',
+        consultation_category: 'popup_urgent'
+      });
       setIsSubmitted(true);
     } catch (error) {
+      trackFunnelEvent('consultation_submit_error', {
+        cta_location: 'popup_submit',
+        form_type: 'popup',
+        consultation_category: 'popup_urgent'
+      });
       console.error('Popup Error:', error);
       alert('전송 중 오류가 발생했습니다. 직접 전화(1688-5644) 문의 주시면 감사하겠습니다.');
     } finally {
@@ -136,7 +161,8 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
             <div className="mt-12">
               <div className="text-[10px] text-amber-500 font-bold uppercase tracking-widest mb-2">Direct Call</div>
               <a 
-                href="tel:1688-5644" 
+                href="tel:1688-5644"
+                onClick={() => trackFunnelEvent('click_to_call', { cta_location: 'popup_phone', form_type: 'popup' })}
                 className="text-2xl font-black text-white hover:text-amber-500 transition-colors block cursor-pointer"
               >
                 1688-5644
@@ -153,7 +179,19 @@ const ConsultationPopup: React.FC<ConsultationPopupProps> = ({ onClose }) => {
                   <p className="text-slate-500 text-sm mt-2">연락처를 남겨주시면 확인 후 신속하게 연락드리겠습니다.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  onSubmit={handleSubmit}
+                  onFocusCapture={() => {
+                    if (hasStartedRef.current) return;
+                    hasStartedRef.current = true;
+                    trackFunnelEvent('consultation_form_start', {
+                      cta_location: 'popup_form',
+                      form_type: 'popup',
+                      consultation_category: 'popup_urgent'
+                    });
+                  }}
+                  className="space-y-6"
+                >
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-700 ml-1">의뢰인 성함</label>
                     <input 

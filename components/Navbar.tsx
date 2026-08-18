@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 type MenuItem =
   | { label: string; id: string; href?: never }
@@ -37,6 +38,10 @@ const Navbar: React.FC = () => {
   };
 
   const handleConsultationClick = () => {
+    trackFunnelEvent('inquiry_open', {
+      cta_location: isMobileMenuOpen ? 'mobile_nav' : 'desktop_nav',
+      form_type: 'bottom_main'
+    });
     setIsMobileMenuOpen(false);
 
     if (window.location.pathname !== '/') {
@@ -194,6 +199,7 @@ const Navbar: React.FC = () => {
 
             <a
               href="tel:1688-5644"
+              onClick={() => trackFunnelEvent('click_to_call', { cta_location: 'mobile_nav_phone' })}
               className="rounded-2xl bg-blue-900 px-5 py-4 text-center text-base font-black text-white shadow-lg"
             >
               전화상담 1688-5644

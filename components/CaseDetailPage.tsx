@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 interface CaseResult {
   id: string;
@@ -286,6 +287,7 @@ const CaseDetailPage: React.FC<CaseDetailPageProps> = ({
   }, [caseData, isLoading]);
 
   const scrollToConsultation = () => {
+    trackFunnelEvent('inquiry_open', { cta_location: 'case_detail_cta', form_type: 'bottom_main' });
     window.location.href = '/#consultation-form';
   };
 

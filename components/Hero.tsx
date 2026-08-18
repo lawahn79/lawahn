@@ -1,7 +1,9 @@
 import React from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 const Hero: React.FC = () => {
   const scrollToForm = () => {
+    trackFunnelEvent('inquiry_open', { cta_location: 'hero_primary', form_type: 'bottom_main' });
     const element = document.getElementById('consultation-form');
 
     if (element) {
@@ -73,7 +75,10 @@ const Hero: React.FC = () => {
               </button>
 
               <button
-                onClick={() => window.location.href = 'tel:1688-5644'}
+                onClick={() => {
+                  trackFunnelEvent('click_to_call', { cta_location: 'hero_phone' });
+                  window.location.href = 'tel:1688-5644';
+                }}
                 className="px-7 md:px-9 py-4 bg-white/5 backdrop-blur-md text-white text-base md:text-lg font-black border border-white/20 rounded-2xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
               >
                 <svg

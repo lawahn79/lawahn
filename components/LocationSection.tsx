@@ -1,4 +1,5 @@
 import React from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 const LocationSection: React.FC = () => {
   const googleMapSrc =
@@ -43,7 +44,7 @@ const LocationSection: React.FC = () => {
                 <div className="space-y-2">
                   <p className="text-slate-600 text-lg flex items-center gap-3">
                     <span className="text-amber-600 font-bold min-w-[50px]">전화</span>
-                    <a href="tel:1688-5644" className="hover:text-amber-600 transition-colors">
+                    <a href="tel:1688-5644" onClick={() => trackFunnelEvent('click_to_call', { cta_location: 'location_phone' })} className="hover:text-amber-600 transition-colors">
                       1688-5644
                     </a>
                   </p>

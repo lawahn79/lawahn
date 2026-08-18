@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { trackFunnelEvent } from '../services/analytics';
 
 const GOLD = '#B89445';
 const NAVY = '#08213D';
@@ -24,11 +25,13 @@ const SectionLead = ({ children }: { children: React.ReactNode }) => (
 const CTAButton = ({
   href,
   children,
-  variant = 'dark'
+  variant = 'dark',
+  ctaLocation = 'haja_cta'
 }: {
   href: string;
   children: React.ReactNode;
   variant?: 'dark' | 'gold' | 'light';
+  ctaLocation?: string;
 }) => {
   const className =
     variant === 'gold'
@@ -40,6 +43,11 @@ const CTAButton = ({
   return (
     <a
       href={href}
+      onClick={() => {
+        if (href.startsWith('tel:')) {
+          trackFunnelEvent('click_to_call', { cta_location: ctaLocation });
+        }
+      }}
       className={`inline-flex items-center justify-center rounded-2xl px-7 py-4 text-sm md:text-base font-black shadow-lg transition-all hover:scale-[1.02] active:scale-95 ${className}`}
     >
       {children}
@@ -191,12 +199,14 @@ const HajaLandingPage: React.FC = () => {
       <div className="fixed bottom-4 left-1/2 z-50 flex w-[calc(100%-24px)] max-w-[620px] -translate-x-1/2 gap-2 rounded-3xl bg-[#08213D]/95 p-2 shadow-2xl backdrop-blur md:hidden">
         <a
           href="tel:1688-5644"
+          onClick={() => trackFunnelEvent('click_to_call', { cta_location: 'haja_mobile_phone' })}
           className="flex-1 rounded-2xl bg-white px-4 py-3 text-center text-sm font-black text-[#08213D]"
         >
           전화 상담
         </a>
         <a
           href="tel:1688-5644"
+          onClick={() => trackFunnelEvent('click_to_call', { cta_location: 'haja_mobile_inquiry' })}
           className="flex-1 rounded-2xl bg-[#B89445] px-4 py-3 text-center text-sm font-black text-white"
         >
           하자소송 문의

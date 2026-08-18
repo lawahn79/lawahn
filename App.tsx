@@ -15,6 +15,7 @@ import HajaLandingPage from './components/HajaLandingPage';
 import CaseResultMarquee from './components/CaseResultMarquee';
 import CertificateMarquee from './components/CertificateMarquee';
 import CaseDetailPage from './components/CaseDetailPage';
+import { trackFunnelEvent } from './services/analytics';
 
 const App: React.FC = () => {
   const [showPopup, setShowPopup] = useState(true);
@@ -52,6 +53,7 @@ const App: React.FC = () => {
   };
 
   const scrollToForm = () => {
+    trackFunnelEvent('inquiry_open', { cta_location: 'contact_card', form_type: 'bottom_main' });
     const element = document.getElementById('consultation-form');
 
     if (!element) {
@@ -143,6 +145,7 @@ const App: React.FC = () => {
                 value: '1688-5644',
                 icon: '📞',
                 action: () => {
+                  trackFunnelEvent('click_to_call', { cta_location: 'contact_card_phone' });
                   window.location.href = 'tel:1688-5644';
                 }
               },
@@ -327,6 +330,7 @@ const App: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => {
+                    trackFunnelEvent('click_to_call', { cta_location: 'direct_contact_phone' });
                     window.location.href = 'tel:1688-5644';
                   }}
                   className="w-full py-4 bg-slate-900 text-white rounded-2xl text-sm font-black hover:bg-slate-800 transition-all shadow-md focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/40"
